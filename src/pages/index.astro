@@ -1,11 +1,16 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import RecipeCard from '../components/RecipeCard.astro';
 import Layout from '../layouts/Layout.astro';
+import type { Meal, MealDBResponse } from '../types/mealdb';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const data = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+const { meals } = (await data.json()) as MealDBResponse;
+const recipe = meals?.[0];
 ---
 
 <Layout>
-	<Welcome />
+  <div class="p-4 mx-auto flex flex-col items-center">
+    <h1 class="font-bold text-4xl capitalize mb-12">featured meal</h1>
+    {recipe && <RecipeCard recipe={recipe} />}
+  </div>
 </Layout>

@@ -1,0 +1,33 @@
+---
+import type { CategoryDBResponse } from '../types/mealdb';
+const data = await fetch(
+  'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+);
+const { meals } = (await data.json()) as CategoryDBResponse;
+---
+
+<header class="bg-purple-500 h-screen w-full max-w-60 sticky top-0">
+  <!-- <nav class="flex justify-between items-center p-4 w-full max-w-7xl mx-auto"> -->
+  <nav class="flex flex-col items-center p-4 gap-y-2 mx-auto">
+    <a
+      href="/"
+      class="text-base text-gray-100 w-full text-left"
+      >Home</a
+    >
+
+    <ul class="space-y-2 flex flex-col gap-y-2 justify-start items-start w-full">
+      {
+        meals.map((category) => (
+          <li>
+            <a
+              href={`/category/${category.strCategory}`}
+              class="text-base text-gray-100"
+            >
+              {category.strCategory}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
