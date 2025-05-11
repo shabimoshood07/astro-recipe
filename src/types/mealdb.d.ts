@@ -68,4 +68,13 @@ export interface Category {
 export interface MealDBResponse {
   meals: Meal[] | null;
 }
+export interface CategoryMealsResponse {
+  idCategory: string;
+  strCategory: string;
+  strCategoryThumb: string;
+  strCategoryDescription: string;
+}
 
+export interface MealCategoryResponse {
+  categories: CategoryMealsResponse[];
+}
