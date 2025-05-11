@@ -1,21 +1,24 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
-import type { MealDBResponse, RawMeal } from '../../types/mealdb';
+import type { MealDBResponse } from '../../types/mealdb';
+import Backbutton from '../../components/Backbutton.astro';
 
 const { id } = Astro.params;
 const data = await fetch(
   `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
 );
 const { meals } = (await data.json()) as MealDBResponse;
-const recipe = meals?.[0] as RawMeal;
+const recipe = meals?.[0];
 if (!recipe) {
   return Astro.redirect('/404');
 }
 
 const ingredients = [];
 for (let i = 1; i <= 20; i++) {
+  // @ts-ignore
   const ingredient = recipe[`strIngredient${i}`] as string;
+  // @ts-ignore
   const measure = recipe[`strMeasure${i}`] as string;
   if (ingredient && ingredient.trim() !== '') {
     ingredients.push({ ingredient, measure });
@@ -27,10 +30,10 @@ const instructions = recipe.strInstructions
   .filter((step) => step.trim() !== '');
 ---
 
-<Layout>
+<Layout title={recipe.strMeal}>
+  <Backbutton client:load />
   <div class="max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-    <!-- Recipe Header -->
-    <div class=" mb-10 space-y-6">
+    <div class="mb-10 space-y-6">
       <h1 class="text-4xl font-bold text-gray-900">{recipe.strMeal}</h1>
       <div class="flex gap-2">
         <span
@@ -61,10 +64,10 @@ const instructions = recipe.strInstructions
           <Image
             src={recipe.strMealThumb}
             alt={recipe.strMeal}
-            width={800}
+            width={600}
             height={600}
-            class="w-full h-auto object-cover"
             loading="eager"
+            class="w-full"
           />
         </div>
 

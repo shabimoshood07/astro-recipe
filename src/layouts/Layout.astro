@@ -1,10 +1,14 @@
 ---
 import '../styles/global.css';
 import Header from '../components/Header.astro';
+import { ClientRouter } from 'astro:transitions';
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html
+  lang="en"
+  class="scroll-smooth"
+>
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -20,12 +24,13 @@ import Header from '../components/Header.astro';
       name="generator"
       content={Astro.generator}
     />
+    <ClientRouter />
     <title>Food Recipes</title>
   </head>
   <body class="min-h-screen">
     <div class="flex">
       <Header />
-      <div class="w-full flex-1">
+      <div class="w-full flex-1 p-6">
         <slot />
       </div>
     </div>

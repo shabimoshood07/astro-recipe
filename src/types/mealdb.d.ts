@@ -13,36 +13,6 @@ export interface Meal {
   strMealThumb: string;
   strTags: string | null;
   strYoutube: string | null;
-  ingredients: Ingredient[];
-  strSource: string | null;
-  strImageSource: string | null;
-  strCreativeCommonsConfirmed: string | null;
-  dateModified: string | null;
-  strMeasure1: string | null;
-  strMeasure2: string | null;
-}
-export interface CategoryDBResponse {
-  meals: Category[];
-}
-export interface Category {
-  strCategory: string;
-}
-
-export interface MealDBResponse {
-  meals: Meal[] | null;
-}
-
-// Helper type for raw API response
-export interface RawMeal {
-  idMeal: string;
-  strMeal: string;
-  strDrinkAlternate: string | null;
-  strCategory: string;
-  strArea: string;
-  strInstructions: string;
-  strMealThumb: string;
-  strTags: string | null;
-  strYoutube: string | null;
   strIngredient1: string | null;
   strIngredient2: string | null;
   strIngredient3: string | null;
@@ -88,7 +58,14 @@ export interface RawMeal {
   strCreativeCommonsConfirmed: string | null;
   dateModified: string | null;
 }
-
-export interface RawMealDBResponse {
-  meals: RawMeal[] | null;
+export interface CategoryDBResponse {
+  meals: Category[];
 }
+export interface Category {
+  strCategory: string;
+}
+
+export interface MealDBResponse {
+  meals: Meal[] | null;
+}
+

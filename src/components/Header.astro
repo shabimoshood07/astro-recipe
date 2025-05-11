@@ -7,21 +7,20 @@ const { meals } = (await data.json()) as CategoryDBResponse;
 ---
 
 <header class="bg-purple-500 h-screen w-full max-w-60 sticky top-0">
-  <!-- <nav class="flex justify-between items-center p-4 w-full max-w-7xl mx-auto"> -->
-  <nav class="flex flex-col items-center p-4 gap-y-2 mx-auto">
+  <nav class="flex flex-col items-center p-4 gap-y-2 mx-auto my-8">
     <a
       href="/"
       class="text-base text-gray-100 w-full text-left"
       >Home</a
     >
 
-    <ul class="space-y-2 flex flex-col gap-y-2 justify-start items-start w-full">
+    <ul class="space-y-2 flex flex-col justify-start items-start w-full">
       {
         meals.map((category) => (
-          <li>
+          <li class="w-full hover:bg-gray-200 transition-all duration-300 rounded-md  group cursor-pointer">
             <a
               href={`/category/${category.strCategory}`}
-              class="text-base text-gray-100"
+              class="text-base text-gray-100 group-hover:text-purple-500 w-full block p-2 "
             >
               {category.strCategory}
             </a>

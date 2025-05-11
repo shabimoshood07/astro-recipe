@@ -1,0 +1,17 @@
+---
+import Backbutton from '../components/Backbutton.astro';
+import Layout from '../layouts/Layout.astro';
+import type { CategoryDBResponse } from '../types/mealdb';
+const data = await fetch(
+  'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+);
+const { meals } = (await data.json()) as CategoryDBResponse;
+
+if (!meals) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout>
+  <Backbutton />
+</Layout>
